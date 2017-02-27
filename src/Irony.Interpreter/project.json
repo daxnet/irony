@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Irony": "1.0.0-*",
+    "NETStandard.Library": "1.6.1"
+  },
+
+  "frameworks": {
+    "net461": {
+      "buildOptions": {
+        "define": [ "_NET461_" ]
+      }
+    },
+    "netstandard1.6": {
+      "imports": "dnxcore50",
+      "dependencies": {
+        "System.Threading.Thread": "4.3.0"
+      },
+      "buildOptions": {
+        "define": [ "_NETCORE_" ]
+      }
+    }
+  },
+
+  "buildOptions": {
+    "keyFile": "../../irony.snk"
+  }
+}
