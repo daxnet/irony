@@ -1,15 +1,19 @@
 ﻿using Irony.Interpreter.Ast;
 using Irony.Parsing;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Irony.SampleApp
 {
+    /// <summary>
+    /// Represents the grammar of a custom expression.
+    /// </summary>
+    /// <seealso cref="Irony.Parsing.Grammar" />
     [Language("Spotfire Expression Grammar", "1.0", "abc")]
     public class ExpressionGrammar : Grammar
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExpressionGrammar"/> class.
+        /// </summary>
         public ExpressionGrammar() : base(false)
         {
             var number = new NumberLiteral("Number");
@@ -22,19 +26,14 @@ namespace Irony.SampleApp
             var BinOp = new NonTerminal("BinaryOperator", "operator");
             var ParExpr = new NonTerminal("ParenthesisExpression");
             var BinExpr = new NonTerminal("BinaryExpression", typeof(BinaryOperationNode));
-            var ArgList = new NonTerminal("ArgumentList", typeof(ExpressionListNode));
-            var Arg = new NonTerminal("Argument");
-            var FunctionCall = new NonTerminal("FunctionCall", typeof(FunctionCallNode));
             var Expr = new NonTerminal("Expression");
             var Term = new NonTerminal("Term");
 
             var Program = new NonTerminal("Program", typeof(StatementListNode));
 
             Expr.Rule = Term | ParExpr | BinExpr;
-            Term.Rule = number | FunctionCall | identifier;
-            Arg.Rule = Expr;
-            ArgList.Rule = MakeStarRule(ArgList, comma, Arg);
-            FunctionCall.Rule = Expr + PreferShiftHere() + "(" + ArgList + ")";
+            Term.Rule = number | identifier;
+
             ParExpr.Rule = "(" + Expr + ")";
             BinExpr.Rule = Expr + BinOp + Expr;
             BinOp.Rule = ToTerm("+") | "-" | "*" | "/";
@@ -42,15 +41,11 @@ namespace Irony.SampleApp
             RegisterOperators(10, "+", "-");
             RegisterOperators(20, "*", "/");
 
-            MarkPunctuation("(", ")", "${", "}", "[", "]");
+            MarkPunctuation("(", ")");
             RegisterBracePair("(", ")");
-            RegisterBracePair("[", "]");
-            MarkTransient(Expr, Term, BinOp, ParExpr, ArgList);
+            MarkTransient(Expr, Term, BinOp, ParExpr);
 
             this.Root = Expr;
-
         }
-
-
     }
 }

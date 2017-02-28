@@ -1,4 +1,5 @@
 ﻿using Irony.Parsing;
+using Irony.SampleApp.Evaluations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,9 @@ namespace Irony.SampleApp
     {
         public static void Main(string[] args)
         {
-            var lang = new LanguageData(new ExpressionGrammar());
-            var parser = new Parser(lang);
-            var tree = parser.Parse("2+3");
-            Console.WriteLine(tree.Status);
+            var evaluator = new Evaluator();
+            var evaluation = evaluator.Evaluate("2.5+(3-1)*5");
+            Console.WriteLine(evaluation.Value);
         }
     }
 }
