@@ -1,8 +1,8 @@
 {
-  "version": "1.0.0-*",
+  "version": "0.999.0-*",
 
   "dependencies": {
-    "Irony": "1.0.0-*",
+    "Irony": "0.999.0-*",
     "NETStandard.Library": "1.6.1"
   },
 

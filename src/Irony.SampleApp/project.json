@@ -1,12 +1,12 @@
 {
-  "version": "1.0.0-*",
+  "version": "0.999.0-*",
   "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "Irony": "1.0.0-*",
-    "Irony.Interpreter": "1.0.0-*",
+    "Irony": "0.999.0-*",
+    "Irony.Interpreter": "0.999.0-*",
     "Microsoft.NETCore.App": {
       "type": "platform",
       "version": "1.0.1"
