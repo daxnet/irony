@@ -25,5 +25,17 @@
 
   "buildOptions": {
     "keyFile": "../../irony.snk"
+  },
+
+  "packOptions": {
+    "summary": "Irony .NET Language Implementation Kit",
+    "licenseUrl": "https://github.com/daxnet/irony/blob/master/LICENSE",
+    "owners": [ "daxnet", "Roman Ivantsov" ],
+    "requireLicenseAcceptance": true,
+    "tags": [ "irony", "parser" ],
+    "repository": {
+      "url": "https://github.com/daxnet/irony/blob/master/LICENSE"
+    }
+
   }
 }
