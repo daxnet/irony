@@ -8,7 +8,7 @@ namespace Irony.SampleApp
     /// Represents the grammar of a custom expression.
     /// </summary>
     /// <seealso cref="Irony.Parsing.Grammar" />
-    [Language("Spotfire Expression Grammar", "1.0", "abc")]
+    [Language("Expression Grammar", "1.0", "A simple arithmetic expression grammar.")]
     public class ExpressionGrammar : Grammar
     {
         /// <summary>

@@ -1,9 +1,5 @@
-﻿using Irony.Parsing;
-using Irony.SampleApp.Evaluations;
+﻿using Irony.SampleApp.Evaluations;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Irony.SampleApp
 {
