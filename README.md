@@ -19,9 +19,11 @@ The Irony and Irony.Interpreter packages have been published to [MyGet](https://
 - For Visual Studio 2012+, please use `https://www.myget.org/F/daxnet-utils/api/v2` as the **NuGet V2** feed URL
 
 For example, following figure shows the _Package Sources_ setting under the _NuGet Package Manager_ section of Visual Studio 2015 Options dialog. You should be able to see how the feed URL is used by Visual Studio.
+
 ![](https://raw.githubusercontent.com/daxnet/irony/master/doc/VS2015Options.png)
 
 After adding the feed URL, you can add the Irony NuGet package by using the standard way of adding a regular package from NuGet.org. Remember to switch the Package Source to the one that you've setup in the _Package Sources_ setting above:
+
 ![](https://raw.githubusercontent.com/daxnet/irony/master/doc/VS2015AddIronyPkg.png)
 
 ## Example
@@ -82,6 +84,7 @@ namespace Irony.SampleApp
 
 ```
 The following class diagram illustrates the object model that can represent an arithmetic expression, the classes shown in this diagram can be found under `Irony.SampleApp.Evaluations` namespace.
+
 ![](https://raw.githubusercontent.com/daxnet/irony/master/doc/ClassDiagram.png)
 
 The `Evaluator` class under `Irony.SampleApp.Evaluations` namespace is responsible for creating the parser based on the above expression grammar definition and parse the input string and finally comes out the evaluated value.
@@ -175,5 +178,7 @@ namespace Irony.SampleApp
 }
 
 ```
+
 Program output:
+
 ![](https://raw.githubusercontent.com/daxnet/irony/master/doc/ProgramOutput.png)
