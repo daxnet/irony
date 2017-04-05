@@ -1,20 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Irony", "src\Irony\Irony.xproj", "{65F4F8EA-1549-44EB-B8AA-C7A6F4CDD0F9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{24CE2713-8206-4C06-9397-7AD757E7D002}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		build\local_publish.ps1 = build\local_publish.ps1
 		build\subst_version.ps1 = build\subst_version.ps1
 	EndProjectSection
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Irony.Interpreter", "src\Irony.Interpreter\Irony.Interpreter.xproj", "{9C9A9585-F983-4616-BA71-4D51CAC0A7D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Irony", "src\Irony\Irony.csproj", "{65F4F8EA-1549-44EB-B8AA-C7A6F4CDD0F9}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Irony.SampleApp", "src\Irony.SampleApp\Irony.SampleApp.xproj", "{9F250C38-91EA-4C15-8AAC-AC3D56955EAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Irony.Interpreter", "src\Irony.Interpreter\Irony.Interpreter.csproj", "{9C9A9585-F983-4616-BA71-4D51CAC0A7D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Irony.SampleApp", "src\Irony.SampleApp\Irony.SampleApp.csproj", "{9F250C38-91EA-4C15-8AAC-AC3D56955EAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
