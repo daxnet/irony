@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.999.0</VersionPrefix>
-    <TargetFrameworks>net461;netstandard1.6</TargetFrameworks>
+    <TargetFrameworks>net452;net461;netstandard1.6</TargetFrameworks>
     <AssemblyName>Irony.Interpreter</AssemblyName>
     <AssemblyOriginatorKeyFile>../../irony.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
@@ -26,10 +26,19 @@
     <ProjectReference Include="..\Irony\Irony.csproj" />
   </ItemGroup>
 
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="System" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <DefineConstants>$(DefineConstants);_NET452_</DefineConstants>
+  </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <DefineConstants>$(DefineConstants);_NET461_</DefineConstants>
