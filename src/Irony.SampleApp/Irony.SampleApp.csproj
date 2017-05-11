@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.999.0</VersionPrefix>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFrameworks>net452;netcoreapp1.0</TargetFrameworks>
     <AssemblyName>Irony.SampleApp</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>Irony.SampleApp</PackageId>
