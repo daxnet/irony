@@ -41,7 +41,7 @@ namespace Irony.Interpreter {
 
   public class SlotInfoDictionary : Dictionary<string, SlotInfo> {
     public SlotInfoDictionary(bool caseSensitive)
-      : base(32, caseSensitive ? StringComparer.CurrentCulture : StringComparer.CurrentCultureIgnoreCase) { }
+      : base(32, caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase) { }
   }
 
 }

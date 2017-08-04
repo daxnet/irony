@@ -285,7 +285,7 @@ namespace Irony.Parsing {
 
 
     //Extract the string content from lexeme, adjusts the escaped and double-end symbols
-    protected override bool ConvertValue(CompoundTokenDetails details) {
+    protected override bool ConvertValue(CompoundTokenDetails details, ParsingContext context) {
       string value = details.Body;
       bool escapeEnabled = !details.IsSet((short)StringOptions.NoEscapes);
       //Fix all escapes

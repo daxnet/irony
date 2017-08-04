@@ -166,7 +166,7 @@ namespace Irony.Parsing {
       //!!! Do not convert to common case (all-lower) for case-insensitive grammar. Let identifiers remain as is, 
       //  it is responsibility of interpreter to provide case-insensitive read/write operations for identifiers
       // if (!this.GrammarData.Grammar.CaseSensitive)
-      //    token.Value = token.Text.ToLower(CultureInfo.CurrentCulture);
+      //    token.Value = token.Text.ToLower(context.Culture);
       CheckReservedWord(token);
       return token; 
     }
@@ -254,7 +254,7 @@ namespace Irony.Parsing {
       return result;
     }
 
-    protected override bool ConvertValue(CompoundTokenDetails details) {
+    protected override bool ConvertValue(CompoundTokenDetails details, ParsingContext context) {
       if (details.IsSet((short)IdOptions.NameIncludesPrefix))
         details.Value = details.Prefix + details.Body;
       else

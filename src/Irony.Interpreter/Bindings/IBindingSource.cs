@@ -26,7 +26,7 @@ namespace Irony.Interpreter {
 
   public class BindingSourceTable : Dictionary<string, IBindingSource>, IBindingSource {
     public BindingSourceTable(bool caseSensitive)
-      : base(caseSensitive ? StringComparer.CurrentCulture : StringComparer.CurrentCultureIgnoreCase) {
+      : base(caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase) {
     }
     //IBindingSource Members
     public Binding Bind(BindingRequest request) {
