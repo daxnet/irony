@@ -150,7 +150,7 @@ namespace Irony.Parsing {
       } else {
         ReadSuffix(source, details);
 
-        if(!ConvertValue(details)) {
+        if(!ConvertValue(details, context)) {
           if (string.IsNullOrEmpty(details.Error))
             details.Error = Resources.ErrInvNumber;
           return context.CreateErrorToken(details.Error); // "Failed to convert the value: {0}"
@@ -188,7 +188,7 @@ namespace Irony.Parsing {
     protected virtual void ReadPrefix(ISourceStream source, CompoundTokenDetails details) {
       if (!_prefixesFirsts.Contains(source.PreviewChar))
         return;
-      var comparisonType = CaseSensitivePrefixesSuffixes ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase;
+      var comparisonType = CaseSensitivePrefixesSuffixes ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
       foreach (string pfx in Prefixes) {
         // Prefixes are usually case insensitive, even if language is case-sensitive. So we cannot use source.MatchSymbol here,
         // we need case-specific comparison
@@ -211,7 +211,7 @@ namespace Irony.Parsing {
 
     protected virtual void ReadSuffix(ISourceStream source, CompoundTokenDetails details) {
       if (!_suffixesFirsts.Contains(source.PreviewChar)) return;
-      var comparisonType = CaseSensitivePrefixesSuffixes ? StringComparison.CurrentCulture : StringComparison.CurrentCultureIgnoreCase;
+      var comparisonType = CaseSensitivePrefixesSuffixes ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase;
       foreach (string sfx in Suffixes) {
         //Suffixes are usually case insensitive, even if language is case-sensitive. So we cannot use source.MatchSymbol here,
         // we need case-specific comparison
@@ -228,7 +228,7 @@ namespace Irony.Parsing {
       }//foreach
     }//method
 
-    protected virtual bool ConvertValue(CompoundTokenDetails details) {
+    protected virtual bool ConvertValue(CompoundTokenDetails details, ParsingContext context) {
       details.Value = details.Body;
       return false; 
     }

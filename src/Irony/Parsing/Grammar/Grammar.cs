@@ -60,7 +60,7 @@ namespace Irony.Parsing {
     
     public string GrammarComments; //shown in Grammar info tab
 
-    public CultureInfo DefaultCulture = CultureInfo.CurrentCulture;
+    public CultureInfo DefaultCulture = CultureInfo.InvariantCulture;
 
     //Console-related properties, initialized in grammar constructor
     public string ConsoleTitle;
@@ -76,8 +76,7 @@ namespace Irony.Parsing {
     public Grammar(bool caseSensitive) {
       _currentGrammar = this;
       this.CaseSensitive = caseSensitive;
-      bool ignoreCase =  !this.CaseSensitive;
-      var stringComparer = ignoreCase ? StringComparer.CurrentCultureIgnoreCase : StringComparer.CurrentCulture;
+      var stringComparer = caseSensitive ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
 
       KeyTerms = new KeyTermTable(stringComparer);
       //Initialize console attributes

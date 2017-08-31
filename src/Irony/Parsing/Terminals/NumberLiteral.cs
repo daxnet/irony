@@ -244,7 +244,7 @@ namespace Irony.Parsing {
       base.OnValidateToken(context);
     }
 
-    protected override bool ConvertValue(CompoundTokenDetails details) {
+    protected override bool ConvertValue(CompoundTokenDetails details, ParsingContext context) {
       if (String.IsNullOrEmpty(details.Body)) {
         details.Error = Resources.ErrInvNumber;  // "Invalid number.";
         return false;
@@ -253,14 +253,14 @@ namespace Irony.Parsing {
       //check for underscore
       if (IsSet(NumberOptions.AllowUnderscore) && details.Body.Contains("_"))
         details.Body = details.Body.Replace("_", string.Empty); 
-
+      
       //Try quick paths
       switch (details.TypeCodes[0]) {
         case TypeCode.Int32: 
-          if (QuickConvertToInt32(details)) return true;
+          if (QuickConvertToInt32(details, context)) return true;
           break;
         case TypeCode.Double:
-          if (QuickConvertToDouble(details)) return true;
+          if (QuickConvertToDouble(details, context)) return true;
           break;
       }
 
@@ -269,12 +269,12 @@ namespace Irony.Parsing {
       foreach (TypeCode typeCode in details.TypeCodes) {
         switch (typeCode) {
           case TypeCode.Single:   case TypeCode.Double:  case TypeCode.Decimal:  case TypeCodeImaginary:
-            return ConvertToFloat(typeCode, details);
+            return ConvertToFloat(typeCode, details, context);
           case TypeCode.SByte:    case TypeCode.Byte:    case TypeCode.Int16:    case TypeCode.UInt16:
           case TypeCode.Int32:    case TypeCode.UInt32:  case TypeCode.Int64:    case TypeCode.UInt64:
             if (details.Value == null) //if it is not done yet
-              TryConvertToLong(details, typeCode == TypeCode.UInt64); //try to convert to Long/Ulong and place the result into details.Value field;
-            if(TryCastToIntegerType(typeCode, details)) //now try to cast the ULong value to the target type 
+              TryConvertToLong(details, typeCode == TypeCode.UInt64, context); //try to convert to Long/Ulong and place the result into details.Value field;
+            if(TryCastToIntegerType(typeCode, details, context)) //now try to cast the ULong value to the target type 
               return true;
             break;
           case TypeCodeBigInt:
@@ -311,14 +311,14 @@ namespace Irony.Parsing {
     #endregion
 
     #region private utilities
-    private bool QuickConvertToInt32(CompoundTokenDetails details) {
+    private bool QuickConvertToInt32(CompoundTokenDetails details, ParsingContext context) {
       int radix = GetRadix(details);
       if (radix == 10 && details.Body.Length > 10) return false;    //10 digits is maximum for int32; int32.MaxValue = 2 147 483 647
       try {
         //workaround for .Net FX bug: http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=278448
         int iValue = 0;
         if (radix == 10)
-          iValue =  Convert.ToInt32(details.Body, CultureInfo.CurrentCulture);
+          iValue =  Convert.ToInt32(details.Body, context.Culture);
         else
           iValue = Convert.ToInt32(details.Body, radix);
         details.Value = iValue;
@@ -328,18 +328,18 @@ namespace Irony.Parsing {
       }
     }//method
 
-    private bool QuickConvertToDouble(CompoundTokenDetails details) {
+    private bool QuickConvertToDouble(CompoundTokenDetails details, ParsingContext context) {
       if (details.IsSet((short)(NumberOptions.Binary | NumberOptions.Octal | NumberOptions.Hex))) return false; 
       if (details.IsSet((short)(NumberFlagsInternal.HasExp))) return false; 
       if (DecimalSeparator != '.') return false;
       double dvalue;
-      if (!double.TryParse(details.Body, NumberStyles.AllowDecimalPoint, CultureInfo.CurrentCulture, out dvalue)) return false;
+      if (!double.TryParse(details.Body, NumberStyles.AllowDecimalPoint, context.Culture, out dvalue)) return false;
       details.Value = dvalue;
       return true; 
     }
 
 
-    private bool ConvertToFloat(TypeCode typeCode, CompoundTokenDetails details) {
+    private bool ConvertToFloat(TypeCode typeCode, CompoundTokenDetails details, ParsingContext context) {
       //only decimal numbers can be fractions
       if (details.IsSet((short)(NumberOptions.Binary | NumberOptions.Octal | NumberOptions.Hex))) {
         details.Error = Resources.ErrInvNumber; //  "Invalid number.";
@@ -359,7 +359,7 @@ namespace Irony.Parsing {
         case TypeCode.Double:
         case TypeCodeImaginary:
           double dValue;
-          if (!Double.TryParse(body, NumberStyles.Float, CultureInfo.CurrentCulture, out dValue)) return false;
+          if (!Double.TryParse(body, NumberStyles.Float, context.Culture, out dValue)) return false;
           if (typeCode == TypeCodeImaginary)
             details.Value = new Complex64(0, dValue);
           else
@@ -367,22 +367,22 @@ namespace Irony.Parsing {
           return true;
         case TypeCode.Single:
           float fValue;
-          if (!Single.TryParse(body, NumberStyles.Float, CultureInfo.CurrentCulture, out fValue)) return false;
+          if (!Single.TryParse(body, NumberStyles.Float, context.Culture, out fValue)) return false;
           details.Value = fValue;
           return true; 
         case TypeCode.Decimal:
           decimal decValue;
-          if (!Decimal.TryParse(body, NumberStyles.Float, CultureInfo.CurrentCulture, out decValue)) return false;
+          if (!Decimal.TryParse(body, NumberStyles.Float, context.Culture, out decValue)) return false;
           details.Value = decValue;
           return true;  
       }//switch
       return false; 
     }
-    private bool TryCastToIntegerType(TypeCode typeCode, CompoundTokenDetails details) {
+    private bool TryCastToIntegerType(TypeCode typeCode, CompoundTokenDetails details, ParsingContext context) {
       if (details.Value == null) return false;
       try {
         if (typeCode != TypeCode.UInt64)
-          details.Value = Convert.ChangeType(details.Value, typeCode, CultureInfo.CurrentCulture);
+          details.Value = Convert.ChangeType(details.Value, typeCode, context.Culture);
         return true;
       } catch (Exception) {
         details.Error = string.Format(Resources.ErrCannotConvertValueToType, details.Value, typeCode.ToString());
@@ -390,15 +390,15 @@ namespace Irony.Parsing {
       }
     }//method
 
-    private bool TryConvertToLong(CompoundTokenDetails details, bool useULong) {
+    private bool TryConvertToLong(CompoundTokenDetails details, bool useULong, ParsingContext context) {
       try {
         int radix = GetRadix(details);
         //workaround for .Net FX bug: http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=278448
         if (radix == 10)
             if (useULong)
-              details.Value = Convert.ToUInt64(details.Body, CultureInfo.CurrentCulture);
+              details.Value = Convert.ToUInt64(details.Body, context.Culture);
             else
-              details.Value = Convert.ToInt64(details.Body, CultureInfo.CurrentCulture);
+              details.Value = Convert.ToInt64(details.Body, context.Culture);
         else
             if (useULong)
               details.Value = Convert.ToUInt64(details.Body, radix);
