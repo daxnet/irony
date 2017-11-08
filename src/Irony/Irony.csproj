@@ -7,7 +7,7 @@
     <AssemblyOriginatorKeyFile>../../irony.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>true</SignAssembly>
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
-    <PackageId>Irony</PackageId>
+    <PackageId>Irony.NetCore</PackageId>
     <PackageTags>irony;parser</PackageTags>
     <PackageLicenseUrl>https://github.com/daxnet/irony/blob/master/LICENSE</PackageLicenseUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
