@@ -20,6 +20,9 @@
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <Description>Irony.NetCore is a .NET Core compatible version of the Irony framework initially developed and maintained by Roman Ivantsov. Irony is a development kit for implementing languages on .NET platform. In Irony the target language grammar is coded directly in c# using operator overloading to express grammar constructs. Irony's scanner and parser modules use the grammar encoded as c# class to control the parsing process.</Description>
+    <PackageProjectUrl>https://github.com/daxnet/irony</PackageProjectUrl>
+    <Authors>daxnet</Authors>
   </PropertyGroup>
 
   <ItemGroup>

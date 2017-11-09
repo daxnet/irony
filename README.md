@@ -10,7 +10,8 @@ Based on the fact that the project on its official site hasn't been updated for 
 	- Changed `StringComparer.InvariantCulture(IgnoreCase)` to `StringComparer.CurrentCulture(IgnoreCase)`
 	- Changed `char.GetUnicodeCategory()` to `CharUnicodeInfo.GetUnicodeCategory(current)`
 	- Temporary removed `ParseTreeExtensions` implementation
-	- Removed the original `Test`, `Sample`, `GrammarExplorer` projects from the Visual Studio solution. Unit tests will be migrated to xUnit in a later stage. And the GrammarExplorer is supposed to be provided in another repo
+	- Migrated the unit test project to xUnit
+	- Removed the original `Test`, `Sample`, `GrammarExplorer` projects from the Visual Studio solution. And the GrammarExplorer is supposed to be provided in another repo
 
 ## Adding the NuGet Package
 The Irony and Irony.Interpreter packages have been published to [MyGet](https://www.myget.org/ "MyGet"). You have to add the MyGet Feed to your package manager settings before you can pull the Irony packages.
