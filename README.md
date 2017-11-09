@@ -14,19 +14,9 @@ Based on the fact that the project on its official site hasn't been updated for 
 	- Removed the original `Test`, `Sample`, `GrammarExplorer` projects from the Visual Studio solution. And the GrammarExplorer is supposed to be provided in another repo
 
 ## Adding the NuGet Package
-The Irony and Irony.Interpreter packages have been published to [MyGet](https://www.myget.org/ "MyGet"). You have to add the MyGet Feed to your package manager settings before you can pull the Irony packages.
-
-- For Visual Studio 2015+, please use `https://www.myget.org/F/daxnet-utils/api/v3/index.json` as the **NuGet V3** feed URL
-- For Visual Studio 2012+, please use `https://www.myget.org/F/daxnet-utils/api/v2` as the **NuGet V2** feed URL
-
-For example, following figure shows the _Package Sources_ setting under the _NuGet Package Manager_ section of Visual Studio 2015 Options dialog. You should be able to see how the feed URL is used by Visual Studio.
-
-![](https://raw.githubusercontent.com/daxnet/irony/master/doc/VS2015Options.png)
-
-After adding the feed URL, you can add the Irony NuGet package by using the standard way of adding a regular package from NuGet.org. Remember to switch the Package Source to the one that you've setup in the _Package Sources_ setting above:
-
-![](https://raw.githubusercontent.com/daxnet/irony/master/doc/VS2015AddIronyPkg.png)
-
+The Irony and Irony.Interpreter packages have been published to NuGet, with the package id `Irony.NetCore` and `Irony.Interpreter.NetCore`, in distinguishing from the original `Irony` and `Irony.Interpreter` packages published by Roman.
+ 
+ 
 ## Example
 This repo contains a full example of an arithmetic expression evaluator, which accepts an arithmetic expression as a string and evaluates and calculates the result. You can find the source code under `Irony.SampleApp` folder. The expression grammar can be represented by the following C# class:
 
