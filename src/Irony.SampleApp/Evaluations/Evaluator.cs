@@ -48,7 +48,7 @@ namespace Irony.SampleApp.Evaluations
                     }
                     return new BinaryEvaluation(left, right, op);
                 case "Number":
-                    var value = Convert.ToSingle(node.Token.Text);
+                    var value = Convert.ToSingle(node.Token.Text, CultureInfo.InvariantCulture.NumberFormat);
                     return new ConstantEvaluation(value);
             }
 
