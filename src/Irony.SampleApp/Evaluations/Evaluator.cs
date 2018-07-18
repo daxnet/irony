@@ -1,5 +1,6 @@
 ﻿using Irony.Parsing;
 using System;
+using System.Globalization;
 using System.Text;
 
 namespace Irony.SampleApp.Evaluations
@@ -48,7 +49,7 @@ namespace Irony.SampleApp.Evaluations
                     }
                     return new BinaryEvaluation(left, right, op);
                 case "Number":
-                    var value = Convert.ToSingle(node.Token.Text);
+                    var value = Convert.ToSingle(node.Token.Text, CultureInfo.InvariantCulture.NumberFormat);
                     return new ConstantEvaluation(value);
             }
 
