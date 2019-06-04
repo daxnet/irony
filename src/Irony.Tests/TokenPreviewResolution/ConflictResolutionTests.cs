@@ -48,7 +48,7 @@ namespace Irony.Tests.TokenPreviewResolution
       Assert.NotNull(term);
       Assert.Equal("definition", term.Name);
 
-      Assert.Equal(1, tree.Root.ChildNodes.Count);
+      Assert.Single(tree.Root.ChildNodes);
       var modNode = tree.Root.ChildNodes[0].ChildNodes[0];
       Assert.Equal("fieldModifier", modNode.Term.Name);
 
@@ -63,7 +63,7 @@ namespace Irony.Tests.TokenPreviewResolution
       Assert.NotNull(term);
       Assert.Equal("definition", term.Name);
 
-      Assert.Equal(1, tree.Root.ChildNodes.Count);
+      Assert.Single(tree.Root.ChildNodes);
       modNode = tree.Root.ChildNodes[0].ChildNodes[0];
       Assert.Equal("propModifier", modNode.Term.Name);
     }

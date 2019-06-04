@@ -3,9 +3,9 @@ using System;
 
 namespace Irony.SampleApp
 {
-    public class Program
+    class Program
     {
-        public static void Main(string[] args)
+        static void Main(string[] args)
         {
             var evaluator = new Evaluator();
             var evaluation = evaluator.Evaluate("2.5+(3-1)*5");
