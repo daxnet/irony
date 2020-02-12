@@ -10,6 +10,7 @@ namespace Irony.SampleApp
             var evaluator = new Evaluator();
             var evaluation = evaluator.Evaluate("2.5+(3-1)*5");
             Console.WriteLine(evaluation.Value);
+            Console.ReadKey();
         }
     }
 }
