@@ -52,8 +52,12 @@ namespace Irony.Interpreter {
       return new LanguageRuntime(language); 
     }
 
+    public virtual OperatorHandler CreateOpeartorHandler(LanguageData language) {
+        return new OperatorHandler(language.Grammar.CaseSensitive);
+    }
+
     public override void BuildAst(LanguageData language, ParseTree parseTree) {
-      var opHandler = new OperatorHandler(language.Grammar.CaseSensitive);
+      var opHandler = CreateOpeartorHandler(language);
       Util.Check(!parseTree.HasErrors(), "ParseTree has errors, cannot build AST.");
       var astContext = new InterpreterAstContext(language, opHandler);
       var astBuilder = new AstBuilder(astContext);
